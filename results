@@ -1,5 +1,0 @@
-<script>start("/Users/rishikgupta/Documents/A&M Courses/ISR 670/Project/results/");</script>
-<script>onHasParentDirectory();</script>
-<script>addRow("BERT_Cosine.csv","BERT_Cosine.csv",0,2601752,"2.5 MB",1744385248,"4/11/25, 10:27:28 AM");</script>
-<script>addRow("BM25.csv","BM25.csv",0,3851522,"3.7 MB",1744395600,"4/11/25, 1:20:00 PM");</script>
-<script>addRow("MiniLM_Cosine.csv","MiniLM_Cosine.csv",0,2816659,"2.7 MB",1744388245,"4/11/25, 11:17:25 AM");</script>
