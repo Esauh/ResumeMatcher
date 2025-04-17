@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5bd6e3193c371c40c270a36a95b09007ed447e2509d39db5a60805354b62dc43"
+            "sha256": "860230c956ade0853ad750f80b6e1b2378e6d347e80f710e252c64f1b754522c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -765,6 +765,15 @@
             "markers": "python_version >= '3.8'",
             "version": "==1.1.1"
         },
+        "ipywidgets": {
+            "hashes": [
+                "sha256:446e7630a1d025bdc7635e1169fcc06f2ce33b5bd41c2003edeb4a47c8d4bbb1",
+                "sha256:d8ace49c66f14419fc66071371b99d01bed230bbc15d8a60233b18bfbd782851"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==8.1.6"
+        },
         "jedi": {
             "hashes": [
                 "sha256:4770dc3de41bde3966b02eb84fbcf557fb33cce26ad23da12c742fb50ecb11f0",
@@ -816,6 +825,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==5.7.2"
+        },
+        "jupyterlab-widgets": {
+            "hashes": [
+                "sha256:54c33e3306b7fca139d165d6190dc6c0627aafa5d14adfc974a4e9a3d26cb703",
+                "sha256:bad03e59546869f026e537e0d170e454259e6dc7048e14041707ca31e523c8a1"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==3.0.14"
         },
         "kubernetes": {
             "hashes": [
@@ -2683,6 +2700,14 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==15.0.1"
+        },
+        "widgetsnbextension": {
+            "hashes": [
+                "sha256:4875a9eaf72fbf5079dc372a51a9f268fc38d46f767cbf85c43a36da5cb9b575",
+                "sha256:a3629b04e3edb893212df862038c7232f62973373869db5084aed739b437b5af"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==4.0.14"
         },
         "wrapt": {
             "hashes": [

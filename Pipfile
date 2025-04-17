@@ -68,6 +68,7 @@ wcwidth = "==0.2.13"
 torch = "*"
 torchvision = "*"
 torchaudio = "*"
+ipywidgets = "*"
 
 [dev-packages]
 ipykernel = "*"
