@@ -11,13 +11,14 @@ NUM_RESUMES = 20
 JOBS_PER_RESUME = 10
 TOTAL_EVALUATIONS = NUM_RESUMES * JOBS_PER_RESUME
 CSV_PATH = "4096_LongFormer_Tokenizer_BM25_matches.csv"
-CSV_PATH = "MpNet_Tokenizer_BM25_matches.csv"
+#CSV_PATH = "MpNet_Tokenizer_BM25_matches.csv"
 OUTPUT_CSV = 'output_' + CSV_PATH
+
+
 
 # Load data into session state only once
 if 'bert_df' not in st.session_state:
     df = pd.read_csv(CSV_PATH)
-
     if 'evaluation' not in df.columns:
         df['evaluation'] = -1
     st.session_state.bert_df = df
@@ -49,35 +50,34 @@ st.progress(job_idx / TOTAL_EVALUATIONS, text=f"{job_idx + 1} / {TOTAL_EVALUATIO
 # Extract resume summary
 resume_text = bert_df.loc[resume_idx * JOBS_PER_RESUME, 'Resume_str']
 match = re.search(r'Summary(.*?)Highlights', resume_text, re.DOTALL)
-summary_text = match.group(1).strip() if match else "No summary found between keywords."
-####resume_text = df.loc[resume_idx * JOBS_PER_RESUME,'resume_text']
-#job_text = bert_df.loc[resume_idx * JOBS_PER_RESUME, 'Job_posting']          #Additional LINE to read CSV FILE
-bm25_score = bert_df.loc[job_idx, 'BM25_score']          #Additional LINE to read CSV FILE
+summary_text = match.group(1).strip() if match else resume_text
 
-# Show resume and job
-st.subheader(f"BM 25 SCORE: {str(bm25_score)} ")
-
-st.subheader(f"Resume {resume_idx + 1} Summary")
-st.markdown(f"<div style='white-space: pre-wrap; word-wrap: break-word; font-size: 16px'>{summary_text}</div>", unsafe_allow_html=True)
-
-st.subheader(f"Job Match {job_idx % JOBS_PER_RESUME + 1}")
+# Get job description and BM25 score
 job_text = bert_df.loc[job_idx, 'Job_posting']
-st.markdown(f"<div style='white-space: pre-wrap; word-wrap: break-word; font-size: 16px'>{job_text}</div>", unsafe_allow_html=True)
+bm25_score = bert_df.loc[job_idx, 'BM25_score']
 
-# Margin before buttons
-st.markdown("<div style='margin-top: 30px;'></div>", unsafe_allow_html=True)
-
-# Centered buttons
-col1, col2, col3 = st.columns([3, 1, 1])
-
-with col2:
+# TOP ROW: BM25 Score and Buttons
+top_col1, top_col2, top_col3 = st.columns([3, 1, 1])
+with top_col1:
+    st.subheader(f"BM25 Score: {bm25_score}")
+with top_col2:
     if st.button("✅ Relevant"):
         bert_df.at[job_idx, 'evaluation'] = 1
         st.session_state.current_job += 1
         st.rerun()
-
-with col3:
+with top_col3:
     if st.button("❌ Not Relevant"):
         bert_df.at[job_idx, 'evaluation'] = 0
         st.session_state.current_job += 1
         st.rerun()
+
+# TWO-COLUMN LAYOUT: Resume on Left, Job on Right
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader(f"Resume {resume_idx + 1} Summary")
+    st.markdown(f"<div style='white-space: pre-wrap; word-wrap: break-word; font-size: 16px'>{summary_text}</div>", unsafe_allow_html=True)
+
+with col2:
+    st.subheader(f"Job Match {job_idx % JOBS_PER_RESUME + 1}")
+    st.markdown(f"<div style='white-space: pre-wrap; word-wrap: break-word; font-size: 16px'>{job_text}</div>", unsafe_allow_html=True)
